@@ -1,0 +1,122 @@
+.video-container {
+	min-height: 685px;
+}
+
+.video-container h1 {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 36px;
+	margin: 0 0 2px;
+}
+
+.video-container .subtitle {
+	font-size: 16px;
+	margin-bottom: 20px;
+}
+
+.video-container progress {
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 5px;
+	position: absolute;
+}
+
+.video-container button {
+	-webkit-appearence: none;
+	display: block;
+	width: 50px;
+	height: 50px;
+	background-size: contain;
+	background-color: transparent;
+	border: none;
+	outline: none;
+	position: absolute;
+	top: -60px;
+	left: 10px;
+	opacity: 0.3;
+	transition: opacity 0.2s ease-in-out;
+	cursor: pointer;
+}
+
+.video-container button.play {
+	background-image: url('http://image005.flaticon.com/1/png/512/0/375.png');
+}
+
+.video-container button.pause {
+	background-image: url('http://freeiconbox.com/icon/256/2371.png');
+}
+
+.video-container button:hover {
+	opacity: 1;
+}
+
+.video-container progress.played {
+		z-index: 2;
+}
+
+.video-container progress.loading {
+		z-index: 1;
+}
+
+.video-container progress::-webkit-progress-bar {
+	background-color: transparent;
+}
+
+.video-container progress.played::-webkit-progress-value {
+	background-color: #F63;
+}
+
+.video-container progress.loading::-webkit-progress-value {
+	background-color: #ccc;
+}
+
+.video-container .controls-container {
+	position: relative;
+}
+
+.video-container input[type=range] {
+	-webkit-appearance: none;
+	margin: 0;
+	width: 100%;
+	position: absolute;
+	z-index: 3;
+	background: transparent;
+}
+
+.video-container input[type=range]:focus {
+	outline: none;
+	background: transparent;
+}
+
+.video-container input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 5px;
+	cursor: pointer;
+	animate: 0.2s;
+	background: transparent;
+}
+
+.video-container input[type=range]::-webkit-slider-thumb {
+	border: none;
+	height: 15px;
+	width: 3px;
+	border-radius: 3px;
+	background: #222;
+	cursor: pointer;
+	-webkit-appearance: none;
+	margin-top: -5px;
+}
+
+.video-container input[type=range]:focus::-webkit-slider-runnable-track {
+	background: transparent;
+}
+
+.video-container .step-count span {
+	position: absolute;
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: #F63;
+	border-radius: 50%;
+	top: -4px;
+}

@@ -1,0 +1,27 @@
+.gallery-container {
+	margin: 40px 0;
+	padding: 0 25px;
+	min-height: 195px;
+}
+
+.gallery-container h2 {
+	padding-left: 10px;
+}
+
+.gallery-container ul {
+	list-style: none;
+	padding: 0;
+	overflow: auto;
+}
+
+.gallery-container ul li {
+	display: inline-block;
+	width: 25%;
+	float: left;
+	position: relative;
+	padding: 0 10px;
+}
+
+.gallery-container ul li img{
+	width: 100%;
+}
