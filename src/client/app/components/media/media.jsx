@@ -1,6 +1,5 @@
 import React from 'react';
 
-import GalleryComponent from './gallery/gallery.jsx';
 import RecipeComponent from './recipe/recipe.jsx';
 
 import contentful from 'contentful';
@@ -8,11 +7,13 @@ import contentful from 'contentful';
 class MediaComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {recipes: []};
+		this.state = {recipe: null};
 	}
 
 	componentWillMount() {
-		this.retrieveData();
+		if (!this.state.recipe) {
+			this.retrieveData();
+		}
 	}
 
 	retrieveData() {
@@ -35,15 +36,16 @@ class MediaComponent extends React.Component {
 			}
 		});
 
-		self.setState({'recipes': recipes});
+		let random = Math.floor(Math.random() * recipes.length) + 1;
+		let recipe = recipes[random - 1];
+
+		self.setState({'recipe': recipe, voiceSearchStep: null});
 	}
 
 	render() {
-		let random = Math.floor(Math.random() * this.state.recipes.length) + 1
-		let recipe = {recipe: this.state.recipes[random - 1], voiceSearchStep: this.props.voiceSearchStep};
 		return (
 			<section>
-				<RecipeComponent recipe={recipe}/>
+				<RecipeComponent recipe={this.state.recipe} voiceSearchStep={this.props.voiceSearchStep}/>
 			</section>
 		);
 	}

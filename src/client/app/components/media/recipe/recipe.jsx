@@ -8,11 +8,11 @@ import "./recipe.css";
 class RecipeComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {selectedStep: (this.props.recipe.voiceSearchStep || this.props.recipe.voiceSearchStep === 0) ? this.props.recipe.voiceSearchStep : null}
+		this.state = {selectedStep: (this.props.voiceSearchStep || this.props.voiceSearchStep === 0) ? this.props.voiceSearchStep : null}
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.setState({selectedStep: nextProps.recipe.voiceSearchStep})
+		this.setState({selectedStep: nextProps.voiceSearchStep})
 	}
 
 	setStep(step) {
@@ -35,7 +35,7 @@ class RecipeComponent extends React.Component {
 	}
 
 	render() {
-		let recipe = this.props.recipe.recipe ? this.props.recipe.recipe.fields : null;
+		let recipe = this.props.recipe ? this.props.recipe.fields : null;
 		let steps = recipe ? this.formatSteps(recipe.recipeJSON[0], recipe.landscapeAssetClean.fields.duration) : null;
 		let video = recipe ? {videoUrl: recipe.landscapeAssetClean.fields.awsOriginal, title: recipe.title, description: recipe.description, steps: steps.steps, selectedStep: this.state.selectedStep} : null;
 		return (

@@ -21,7 +21,7 @@ class VoiceModule extends React.Component {
 	componentDidMount() {
 		if (annyang) {
 			let commands = {
-				'go to the beginning': this.setVoiceStep.bind(this, 'beginning'),
+				'play from the beginning': this.setVoiceStep.bind(this, 'beginning'),
 				'go to step one': this.setVoiceStep.bind(this, 0),
 				'go to step two': this.setVoiceStep.bind(this, 1),
 				'go to step three': this.setVoiceStep.bind(this, 2),
