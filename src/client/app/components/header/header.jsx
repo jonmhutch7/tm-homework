@@ -10,7 +10,7 @@ class HeaderComponent extends React.Component {
 		return (
 			<header>
 				<img src='https://d37dagtz5y7rwi.cloudfront.net/dist/images/logos/tm-logo-8e6bed060c.png' />
-				<VoiceModule onVoiceSearch={this.props.onVoiceSearch} />
+				<VoiceModule onVoiceSearch={this.props.onVoiceSearch} stepLength={this.props.stepLength} />
 			</header>
 		);
 	}

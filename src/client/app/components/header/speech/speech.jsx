@@ -7,6 +7,7 @@ import "./speech.css";
 class VoiceModule extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = {stepLength: 0}
 	}
 
 	setVoiceStep(step) {
@@ -15,19 +16,30 @@ class VoiceModule extends React.Component {
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		return false;
+	    return nextProps.stepLength !== nextState.stepLength;
 	}
 
-	componentDidMount() {
-		if (annyang) {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.stepLength !== this.state.stepLength) {
+			this.state.stepLength = nextProps.stepLength;
+			this.setupVoice();
+		}
+	}
+
+	setupVoice() {
+		if (annyang && this.state.stepLength) {
 			let commands = {
 				'play from the beginning': this.setVoiceStep.bind(this, 'beginning'),
-				'go to step one': this.setVoiceStep.bind(this, 0),
-				'go to step two': this.setVoiceStep.bind(this, 1),
-				'go to step three': this.setVoiceStep.bind(this, 2),
 				'pause video': this.setVoiceStep.bind(this, 'pause'),
 				'play video': this.setVoiceStep.bind(this, 'play')
 			};
+
+			for (let i = 0; i < this.state.stepLength; i++) {
+				let command = {};
+				let step = i + 1;
+				command['go to step ' + step] = this.setVoiceStep.bind(this, i);
+				annyang.addCommands(command);
+			}
 
 			annyang.addCommands(commands);
 		}
