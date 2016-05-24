@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactPlayer from 'react-player'
 
+import ControlModule from './controls/controls.jsx';
+
 import './video.css';
 
 class VideoComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {isLoading: false};
+		this.state = {};
 	}
 
 	componentWillReceiveProps(props) {
@@ -93,36 +95,20 @@ class VideoComponent extends React.Component {
 							onProgress={this.onProgress.bind(this)}
 						/>
 						<div className='controls-container'>
-							<div className="progress-container">
-								<input
-									type='range' min={0} max={1} step='any'
-									value={this.state.played}
-									onMouseDown={this.onSeekMouseDown.bind(this)}
-									onChange={this.onSeekChange.bind(this)}
-									onMouseUp={this.onSeekMouseUp.bind(this)}
-								/>
-								<progress className='played' max={1} value={this.state.played} />
-								<progress className='loading' max={1} value={this.state.loaded} />
-								<div className="step-count">
-									{ 
-										steps.map(function(step, index) {
-											let elem = document.getElementsByClassName('step-count');
-											let width = elem.length ? elem[0].offsetWidth : 0;
-											let time = step.time * 100;
-											let position = ((time * width) / 100);
-											let stepPosition = {'left': position};
-											return <span key={index} style={stepPosition}></span>
-										})
-									}
-								</div>
-							</div>
 							<div className='buttons'>
 								<button onClick={this.togglePlay.bind(this)} className={this.state.playing ? 'pause' : 'play'}></button>
 							</div>
+							<ControlModule
+								played={this.state.played}
+								loaded={this.state.loaded}
+								mouseDown={this.onSeekMouseDown.bind(this)}
+								change={this.onSeekChange.bind(this)}
+								mouseUp={this.onSeekMouseUp.bind(this)}
+								steps={steps} />
 						</div>
 					</div>
 				: 
-					<div>Loading</div>
+					<div className='loading'></div>
 				}
 			</div>
 		);

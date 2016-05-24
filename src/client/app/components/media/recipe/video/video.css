@@ -10,7 +10,7 @@
 
 .video-container .subtitle {
 	font-size: 16px;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 }
 
 .video-container progress {
@@ -54,7 +54,7 @@
 		z-index: 2;
 }
 
-.video-container progress.loading {
+.video-container progress.video-load {
 		z-index: 1;
 }
 
@@ -66,7 +66,7 @@
 	background-color: #F63;
 }
 
-.video-container progress.loading::-webkit-progress-value {
+.video-container progress.video-load::-webkit-progress-value {
 	background-color: #ccc;
 }
 

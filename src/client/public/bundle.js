@@ -32748,6 +32748,10 @@
 	
 	var _reactPlayer2 = _interopRequireDefault(_reactPlayer);
 	
+	var _controls = __webpack_require__(/*! ./controls/controls.jsx */ 787);
+	
+	var _controls2 = _interopRequireDefault(_controls);
+	
 	__webpack_require__(/*! ./video.css */ 200);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -32766,7 +32770,7 @@
 	
 			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(VideoComponent).call(this, props));
 	
-			_this.state = { isLoading: false };
+			_this.state = {};
 			return _this;
 		}
 	
@@ -32880,40 +32884,18 @@
 							{ className: 'controls-container' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'progress-container' },
-								_react2.default.createElement('input', {
-									type: 'range', min: 0, max: 1, step: 'any',
-									value: this.state.played,
-									onMouseDown: this.onSeekMouseDown.bind(this),
-									onChange: this.onSeekChange.bind(this),
-									onMouseUp: this.onSeekMouseUp.bind(this)
-								}),
-								_react2.default.createElement('progress', { className: 'played', max: 1, value: this.state.played }),
-								_react2.default.createElement('progress', { className: 'loading', max: 1, value: this.state.loaded }),
-								_react2.default.createElement(
-									'div',
-									{ className: 'step-count' },
-									steps.map(function (step, index) {
-										var elem = document.getElementsByClassName('step-count');
-										var width = elem.length ? elem[0].offsetWidth : 0;
-										var time = step.time * 100;
-										var position = time * width / 100;
-										var stepPosition = { 'left': position };
-										return _react2.default.createElement('span', { key: index, style: stepPosition });
-									})
-								)
-							),
-							_react2.default.createElement(
-								'div',
 								{ className: 'buttons' },
 								_react2.default.createElement('button', { onClick: this.togglePlay.bind(this), className: this.state.playing ? 'pause' : 'play' })
-							)
+							),
+							_react2.default.createElement(_controls2.default, {
+								played: this.state.played,
+								loaded: this.state.loaded,
+								mouseDown: this.onSeekMouseDown.bind(this),
+								change: this.onSeekChange.bind(this),
+								mouseUp: this.onSeekMouseUp.bind(this),
+								steps: steps })
 						)
-					) : _react2.default.createElement(
-						'div',
-						null,
-						'Loading'
-					)
+					) : _react2.default.createElement('div', { className: 'loading' })
 				);
 			}
 		}]);
@@ -33069,7 +33051,7 @@
   \**********************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;var require;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
+	var require;var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(process, global, module) {/*!
 	 * @overview es6-promise - a tiny implementation of Promises/A+.
 	 * @copyright Copyright (c) 2014 Yehuda Katz, Tom Dale, Stefan Penner and contributors (Conversion to ES6 API by Jake Archibald)
 	 * @license   Licensed under MIT license
@@ -35425,7 +35407,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".video-container {\n\tmin-height: 685px;\n}\n\n.video-container h1 {\n\tfont-family: 'Montserrat', sans-serif;\n\tfont-size: 36px;\n\tmargin: 0 0 2px;\n}\n\n.video-container .subtitle {\n\tfont-size: 16px;\n\tmargin-bottom: 20px;\n}\n\n.video-container progress {\n\t-webkit-appearance: none;\n\tappearance: none;\n\twidth: 100%;\n\theight: 5px;\n\tposition: absolute;\n}\n\n.video-container button {\n\t-webkit-appearence: none;\n\tdisplay: block;\n\twidth: 50px;\n\theight: 50px;\n\tbackground-size: contain;\n\tbackground-color: transparent;\n\tborder: none;\n\toutline: none;\n\tposition: absolute;\n\ttop: -60px;\n\tleft: 10px;\n\topacity: 0.3;\n\ttransition: opacity 0.2s ease-in-out;\n\tcursor: pointer;\n}\n\n.video-container button.play {\n\tbackground-image: url('http://image005.flaticon.com/1/png/512/0/375.png');\n}\n\n.video-container button.pause {\n\tbackground-image: url('http://freeiconbox.com/icon/256/2371.png');\n}\n\n.video-container button:hover {\n\topacity: 1;\n}\n\n.video-container progress.played {\n\t\tz-index: 2;\n}\n\n.video-container progress.loading {\n\t\tz-index: 1;\n}\n\n.video-container progress::-webkit-progress-bar {\n\tbackground-color: transparent;\n}\n\n.video-container progress.played::-webkit-progress-value {\n\tbackground-color: #F63;\n}\n\n.video-container progress.loading::-webkit-progress-value {\n\tbackground-color: #ccc;\n}\n\n.video-container .controls-container {\n\tposition: relative;\n}\n\n.video-container input[type=range] {\n\t-webkit-appearance: none;\n\tmargin: 0;\n\twidth: 100%;\n\tposition: absolute;\n\tz-index: 3;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]:focus {\n\toutline: none;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]::-webkit-slider-runnable-track {\n\twidth: 100%;\n\theight: 5px;\n\tcursor: pointer;\n\tanimate: 0.2s;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]::-webkit-slider-thumb {\n\tborder: none;\n\theight: 15px;\n\twidth: 3px;\n\tborder-radius: 3px;\n\tbackground: #222;\n\tcursor: pointer;\n\t-webkit-appearance: none;\n\tmargin-top: -5px;\n}\n\n.video-container input[type=range]:focus::-webkit-slider-runnable-track {\n\tbackground: transparent;\n}\n\n.video-container .step-count span {\n\tposition: absolute;\n\tdisplay: block;\n\twidth: 12px;\n\theight: 12px;\n\tbackground: #F63;\n\tborder-radius: 50%;\n\ttop: -4px;\n}", ""]);
+	exports.push([module.id, ".video-container {\n\tmin-height: 685px;\n}\n\n.video-container h1 {\n\tfont-family: 'Montserrat', sans-serif;\n\tfont-size: 36px;\n\tmargin: 0 0 2px;\n}\n\n.video-container .subtitle {\n\tfont-size: 16px;\n\tmargin-bottom: 25px;\n}\n\n.video-container progress {\n\t-webkit-appearance: none;\n\tappearance: none;\n\twidth: 100%;\n\theight: 5px;\n\tposition: absolute;\n}\n\n.video-container button {\n\t-webkit-appearence: none;\n\tdisplay: block;\n\twidth: 50px;\n\theight: 50px;\n\tbackground-size: contain;\n\tbackground-color: transparent;\n\tborder: none;\n\toutline: none;\n\tposition: absolute;\n\ttop: -60px;\n\tleft: 10px;\n\topacity: 0.3;\n\ttransition: opacity 0.2s ease-in-out;\n\tcursor: pointer;\n}\n\n.video-container button.play {\n\tbackground-image: url('http://image005.flaticon.com/1/png/512/0/375.png');\n}\n\n.video-container button.pause {\n\tbackground-image: url('http://freeiconbox.com/icon/256/2371.png');\n}\n\n.video-container button:hover {\n\topacity: 1;\n}\n\n.video-container progress.played {\n\t\tz-index: 2;\n}\n\n.video-container progress.video-load {\n\t\tz-index: 1;\n}\n\n.video-container progress::-webkit-progress-bar {\n\tbackground-color: transparent;\n}\n\n.video-container progress.played::-webkit-progress-value {\n\tbackground-color: #F63;\n}\n\n.video-container progress.video-load::-webkit-progress-value {\n\tbackground-color: #ccc;\n}\n\n.video-container .controls-container {\n\tposition: relative;\n}\n\n.video-container input[type=range] {\n\t-webkit-appearance: none;\n\tmargin: 0;\n\twidth: 100%;\n\tposition: absolute;\n\tz-index: 3;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]:focus {\n\toutline: none;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]::-webkit-slider-runnable-track {\n\twidth: 100%;\n\theight: 5px;\n\tcursor: pointer;\n\tanimate: 0.2s;\n\tbackground: transparent;\n}\n\n.video-container input[type=range]::-webkit-slider-thumb {\n\tborder: none;\n\theight: 15px;\n\twidth: 3px;\n\tborder-radius: 3px;\n\tbackground: #222;\n\tcursor: pointer;\n\t-webkit-appearance: none;\n\tmargin-top: -5px;\n}\n\n.video-container input[type=range]:focus::-webkit-slider-runnable-track {\n\tbackground: transparent;\n}\n\n.video-container .step-count span {\n\tposition: absolute;\n\tdisplay: block;\n\twidth: 12px;\n\theight: 12px;\n\tbackground: #F63;\n\tborder-radius: 50%;\n\ttop: -4px;\n}", ""]);
 	
 	// exports
 
@@ -35528,11 +35510,7 @@
 								})
 							)
 						)
-					) : _react2.default.createElement(
-						'div',
-						null,
-						'Loading'
-					)
+					) : _react2.default.createElement('div', { className: 'loading' })
 				);
 			}
 		}]);
@@ -35583,7 +35561,7 @@
 	
 	
 	// module
-	exports.push([module.id, ".steps-container {\n\tmargin-top: 25px;\n\tmin-height: 300px;\n}\n\n.steps-container .col-left {\n\twidth: 350px;\n\tdisplay: inline-block;\n\tfloat: left;\n\tpadding: 0 15px;\n}\n\n.steps-container .col-right {\n\twidth: calc(100% - 350px);\n\tdisplay: inline-block;\n\tfloat: right;\n\tpadding: 0 15px;\n}\n\n.ingredients-list {\n\tpadding: 0;\n\tlist-style: none;\n}\n\n.ingredients-list li {\n\tmargin-bottom: 7px;\n}\n\n.ingredients-list li:last-child {\n\tmargin-bottom: 0;\n}\n\n.steps-list {\n\tpadding: 0 0 0 20px;\n\tlist-style: decimal;\n}\n\n.steps-list li {\n\tfont-family: 'Montserrat', sans-serif;\n\tfont-size: 20px;\n\tcursor: pointer;\n\tposition: relative;\n}\n\n.steps-list li span{\n\tfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;\n\tdisplay: block;\n\tpadding: 10px;\n\tfont-size: 18px;\n\tline-height: 24px;\n\tborder-radius: 5px;\n}\n\n.steps-list li:hover:after {\n\tcontent: '';\n\tdisplay: block;\n\twidth: 25px;\n\theight: 25px;\n\tbackground-image: url('http://image005.flaticon.com/1/png/512/0/375.png');\n\tbackground-size: contain;\n\tposition: absolute;\n\tleft: -55px;\n\ttop: 9px;\n}\n\n.steps-list li:hover span {\n\tbackground-color: rgba(255, 102, 51, 0.2);\n}", ""]);
+	exports.push([module.id, ".steps-container {\n\tmargin-top: 40px;\n\tmin-height: 300px;\n}\n\n.steps-container .col-left {\n\twidth: 350px;\n\tdisplay: inline-block;\n\tfloat: left;\n\tpadding: 0 15px;\n}\n\n.steps-container .col-right {\n\twidth: calc(100% - 350px);\n\tdisplay: inline-block;\n\tfloat: right;\n\tpadding: 0 15px;\n}\n\n.ingredients-list {\n\tpadding: 0;\n\tlist-style: none;\n}\n\n.ingredients-list li {\n\tmargin-bottom: 7px;\n}\n\n.ingredients-list li:last-child {\n\tmargin-bottom: 0;\n}\n\n.steps-list {\n\tpadding: 0 0 0 20px;\n\tlist-style: decimal;\n}\n\n.steps-list li {\n\tfont-family: 'Montserrat', sans-serif;\n\tfont-size: 20px;\n\tcursor: pointer;\n\tposition: relative;\n}\n\n.steps-list li span{\n\tfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif;\n\tdisplay: block;\n\tpadding: 10px;\n\tfont-size: 18px;\n\tline-height: 24px;\n\tborder-radius: 5px;\n}\n\n.steps-list li:hover:after {\n\tcontent: '';\n\tdisplay: block;\n\twidth: 25px;\n\theight: 25px;\n\tbackground-image: url('http://image005.flaticon.com/1/png/512/0/375.png');\n\tbackground-size: contain;\n\tposition: absolute;\n\tleft: -55px;\n\ttop: 9px;\n}\n\n.steps-list li:hover span {\n\tbackground-color: rgba(255, 102, 51, 0.2);\n}", ""]);
 	
 	// exports
 
@@ -59921,7 +59899,136 @@
 	
 	
 	// module
-	exports.push([module.id, "html { \n\tbox-sizing: border-box;\n}\n*, *:before, *:after { \n\tbox-sizing: inherit;\n}\nbody { \n\tmin-height: 100vh;\n}\nbody, ul, ol, dl, figure {\n\tmargin: 0;\n}\n\nbody {\n\tmax-width: 1100px;\n\tmargin: 0 auto;\n\tfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif; \n\tfont-weight: 300;\n}\n\nh2 {\n\tfont-family: 'Montserrat', sans-serif;\n\tmargin: 0 0 10px;\n\tfont-size: 22px;\n}", ""]);
+	exports.push([module.id, "html { \n\tbox-sizing: border-box;\n}\n*, *:before, *:after { \n\tbox-sizing: inherit;\n}\nbody { \n\tmin-height: 100vh;\n}\nbody, ul, ol, dl, figure {\n\tmargin: 0;\n}\n\nbody {\n\tmax-width: 1100px;\n\tmargin: 0 auto;\n\tfont-family: \"HelveticaNeue-Light\", \"Helvetica Neue Light\", \"Helvetica Neue\", Helvetica, Arial, \"Lucida Grande\", sans-serif; \n\tfont-weight: 300;\n}\n\nh2 {\n\tfont-family: 'Montserrat', sans-serif;\n\tmargin: 0 0 10px;\n\tfont-size: 22px;\n}\n\n.loading {\n  margin: 50px auto;\n  font-size: 10px;\n  width: 1em;\n  height: 1em;\n  border-radius: 50%;\n  position: relative;\n  text-indent: -9999em;\n  -webkit-animation: load5 1.1s infinite ease;\n  animation: load5 1.1s infinite ease;\n  -webkit-transform: translateZ(0);\n  -ms-transform: translateZ(0);\n  transform: translateZ(0);\n}\n@-webkit-keyframes load5 {\n  0%,\n  100% {\n    box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.5), -1.8em -1.8em 0 0em rgba(0,0,0, 0.7);\n  }\n  12.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.5);\n  }\n  25% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.5), 1.8em -1.8em 0 0em rgba(0,0,0, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  37.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.5), 2.5em 0em 0 0em rgba(0,0,0, 0.7), 1.75em 1.75em 0 0em #ffffff, 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  50% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.5), 1.75em 1.75em 0 0em rgba(0,0,0, 0.7), 0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  62.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.5), 0em 2.5em 0 0em rgba(0,0,0, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  75% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.5), -1.8em 1.8em 0 0em rgba(0,0,0, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  87.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.5), -2.6em 0em 0 0em rgba(0,0,0, 0.7), -1.8em -1.8em 0 0em #ffffff;\n  }\n}\n@keyframes load5 {\n  0%,\n  100% {\n    box-shadow: 0em -2.6em 0em 0em #ffffff, 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.5), -1.8em -1.8em 0 0em rgba(0,0,0, 0.7);\n  }\n  12.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.7), 1.8em -1.8em 0 0em #ffffff, 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.5);\n  }\n  25% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.5), 1.8em -1.8em 0 0em rgba(0,0,0, 0.7), 2.5em 0em 0 0em #ffffff, 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  37.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.5), 2.5em 0em 0 0em rgba(0,0,0, 0.7), 1.75em 1.75em 0 0em #ffffff, 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  50% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.5), 1.75em 1.75em 0 0em rgba(0,0,0, 0.7), 0em 2.5em 0 0em #ffffff, -1.8em 1.8em 0 0em rgba(0,0,0, 0.2), -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  62.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.5), 0em 2.5em 0 0em rgba(0,0,0, 0.7), -1.8em 1.8em 0 0em #ffffff, -2.6em 0em 0 0em rgba(0,0,0, 0.2), -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  75% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.5), -1.8em 1.8em 0 0em rgba(0,0,0, 0.7), -2.6em 0em 0 0em #ffffff, -1.8em -1.8em 0 0em rgba(0,0,0, 0.2);\n  }\n  87.5% {\n    box-shadow: 0em -2.6em 0em 0em rgba(0,0,0, 0.2), 1.8em -1.8em 0 0em rgba(0,0,0, 0.2), 2.5em 0em 0 0em rgba(0,0,0, 0.2), 1.75em 1.75em 0 0em rgba(0,0,0, 0.2), 0em 2.5em 0 0em rgba(0,0,0, 0.2), -1.8em 1.8em 0 0em rgba(0,0,0, 0.5), -2.6em 0em 0 0em rgba(0,0,0, 0.7), -1.8em -1.8em 0 0em #ffffff;\n  }\n}\n", ""]);
+	
+	// exports
+
+
+/***/ },
+/* 787 */
+/*!****************************************************************************!*\
+  !*** ./src/client/app/components/media/recipe/video/controls/controls.jsx ***!
+  \****************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	__webpack_require__(/*! ./controls.css */ 788);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ControlModule = function (_React$Component) {
+		_inherits(ControlModule, _React$Component);
+	
+		function ControlModule(props) {
+			_classCallCheck(this, ControlModule);
+	
+			var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ControlModule).call(this, props));
+	
+			_this.state = {};
+			return _this;
+		}
+	
+		_createClass(ControlModule, [{
+			key: "render",
+			value: function render() {
+				var props = this.props;
+				var isLoading = this.props.steps ? true : false;
+				return _react2.default.createElement(
+					"div",
+					{ className: "progress-container" },
+					isLoading ? _react2.default.createElement(
+						"div",
+						null,
+						_react2.default.createElement("input", {
+							type: "range", min: 0, max: 1, step: "any",
+							value: props.played,
+							onMouseDown: props.mouseDown.bind(this),
+							onChange: props.change.bind(this),
+							onMouseUp: props.mouseUp.bind(this)
+						}),
+						_react2.default.createElement("progress", { className: "played", max: 1, value: props.played }),
+						_react2.default.createElement("progress", { className: "video-load", max: 1, value: props.loaded }),
+						_react2.default.createElement(
+							"div",
+							{ className: "step-count" },
+							props.steps.map(function (step, index) {
+								var elem = document.getElementsByClassName('step-count');
+								var width = elem.length ? elem[0].offsetWidth : 0;
+								var time = step.time * 100;
+								var position = time * width / 100;
+								var stepPosition = { 'left': position };
+								return _react2.default.createElement("span", { key: index, style: stepPosition });
+							})
+						)
+					) : _react2.default.createElement("div", { className: "loading" })
+				);
+			}
+		}]);
+	
+		return ControlModule;
+	}(_react2.default.Component);
+	
+	exports.default = ControlModule;
+
+/***/ },
+/* 788 */
+/*!****************************************************************************!*\
+  !*** ./src/client/app/components/media/recipe/video/controls/controls.css ***!
+  \****************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	// style-loader: Adds some css to the DOM by adding a <style> tag
+	
+	// load the styles
+	var content = __webpack_require__(/*! !./../../../../../../../../~/css-loader!./controls.css */ 789);
+	if(typeof content === 'string') content = [[module.id, content, '']];
+	// add the styles to the DOM
+	var update = __webpack_require__(/*! ./../../../../../../../../~/style-loader/addStyles.js */ 177)(content, {});
+	if(content.locals) module.exports = content.locals;
+	// Hot Module Replacement
+	if(false) {
+		// When the styles change, update the <style> tags
+		if(!content.locals) {
+			module.hot.accept("!!./../../../../../../../../node_modules/css-loader/index.js!./controls.css", function() {
+				var newContent = require("!!./../../../../../../../../node_modules/css-loader/index.js!./controls.css");
+				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+				update(newContent);
+			});
+		}
+		// When the module is disposed, remove the <style> tags
+		module.hot.dispose(function() { update(); });
+	}
+
+/***/ },
+/* 789 */
+/*!*******************************************************************************************!*\
+  !*** ./~/css-loader!./src/client/app/components/media/recipe/video/controls/controls.css ***!
+  \*******************************************************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	exports = module.exports = __webpack_require__(/*! ./../../../../../../../../~/css-loader/lib/css-base.js */ 175)();
+	// imports
+	
+	
+	// module
+	exports.push([module.id, "", ""]);
 	
 	// exports
 

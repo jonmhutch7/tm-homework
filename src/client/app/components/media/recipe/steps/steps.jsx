@@ -39,7 +39,7 @@ class StepsComponent extends React.Component {
 						</div>
 					</div>
 				: 
-					<div>Loading</div>
+					<div className='loading'></div>
 				}
 			</div>
 		);
