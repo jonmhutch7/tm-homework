@@ -8,11 +8,16 @@ import './video.css';
 class VideoComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		if (props.video) {
+			this.state = {selectedStep: props.video.selectedStep};
+		} else {
+			this.state = {};
+		}
 	}
 
 	componentWillReceiveProps(props) {
 		let selectedStep = props.video.selectedStep;
+		this.setState({selectedStep: props.video.selectedStep})
 		if ((selectedStep || selectedStep === 0) && (!isNaN(selectedStep))) {
 			let stepTime = props.video.steps[selectedStep]['time'];
 			this.setState({ playing: true, played: parseFloat(stepTime), loaded: 0, url: props.video.videoUrl });
@@ -44,7 +49,7 @@ class VideoComponent extends React.Component {
 	}
 
 	togglePlay() {
-		this.setState({ playing: !this.state.playing });
+		this.setState({ playing: !this.state.playing, selectedStep: null });
 	}
 
 	playVideo() {
@@ -69,6 +74,24 @@ class VideoComponent extends React.Component {
 	onProgress(state) {
 		if (!this.state.seeking) {
 			this.setState(state)
+		}
+
+		let step = this.state.selectedStep;
+		if ((step || step === 0) && step !== 'play') {
+			let videoStep = this.props.video.steps[step];
+			let videoStepTime = videoStep.time;
+			let nextStep = step + 1;
+			let nextStepTime;
+			if (nextStep > (this.props.video.steps.length - 1)) {
+				nextStepTime = 0.98;
+			} else {
+				nextStepTime = this.props.video.steps[nextStep].time;
+			}
+
+			if (state.played > nextStepTime) {
+				this.refs.player.seekTo(parseFloat(videoStepTime))
+			}
+
 		}
 	}
 

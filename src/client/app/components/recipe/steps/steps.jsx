@@ -5,7 +5,17 @@ import './steps.css';
 class StepsComponent extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
+		this.state = {active: null};
+	}
+
+	loopStep(step) {
+		if (step === this.state.active) {
+			this.props.setStep('play');
+			this.setState({active: null});
+		} else {
+			this.props.setStep(step);
+			this.setState({active: step});
+		}
 	}
 
 	render() {
@@ -32,7 +42,7 @@ class StepsComponent extends React.Component {
 							<ul className='steps-list'>
 								{
 									steps.map(function(step, index) {
-										return <li onClick={self.props.setStep.bind(self, index)} key={index}><span>{step.step}</span></li>
+										return <li className={self.state.active === index ? 'active' : ''} onClick={self.loopStep.bind(self, index)} key={index}><span>{step.step}</span></li>
 									})
 								}
 							</ul>

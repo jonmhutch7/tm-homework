@@ -30,24 +30,14 @@ class App extends React.Component {
 
 		let self = this;
 
-		client.getEntries({'content_type': 'video','fields.publishDate[lte]': new Date().toISOString(), 'fields.series[exists]': false, 'order': '-fields.publishDate,sys.id',}).then(function(data) {
-			self.filterData(data.items, self);
+		client.getEntries({'content_type': 'video', 'fields.slug': 'chicken-alfredo', 'include': 2}).then(function(data) {
+			self.setState({'recipe': data.items[0], voiceSearchStep: null});
 		});
 	}
 
 	filterData(data, self) {
-		let recipes = [];
-		data.map(function(obj) {
-			let recipe = obj.fields;
-			if (recipe.recipeJSON && recipe.landscapeAssetClean && recipe.landscapeThumbnail) {
-				recipes.push(obj);
-			}
-		});
+		let recipe = data.items[0];
 
-		let random = Math.floor(Math.random() * recipes.length) + 1;
-		let recipe = recipes[random - 1];
-
-		self.setState({'recipe': recipe, voiceSearchStep: null});
 	}
 
 	render () {
